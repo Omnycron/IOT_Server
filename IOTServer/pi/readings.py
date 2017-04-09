@@ -6,7 +6,7 @@ import urllib2
 import time
 import requests
 
-url = "http://192.168.0.31:5000/weather/api/v1.0/readings/"
+url = "http://192.168.0.31:5000/weather/api/readings/"
 sensor2 = Adafruit_DHT.DHT22
 pin = 4
 

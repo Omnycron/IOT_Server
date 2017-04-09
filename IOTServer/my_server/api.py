@@ -1,12 +1,14 @@
 #!usr/bin/python
+import json
+import logging
+import sys
+import time
+
+import datastore
 from flask import Flask, jsonify, abort, make_response, request, url_for
 from flask_cors import CORS
-import time
-import sys
 import reading
-import datastore
-import logging
-import json
+
 
 logging.basicConfig(filename="api.log", level=logging.DEBUG)
 
@@ -17,15 +19,15 @@ CORS(app)
 def not_found(self):
     return make_response(jsonify({"error": "Not found"}), 404)
     
-@app.route("/weather/api/v1.0/readings", methods=["GET"])
+@app.route("/weather/api/readings", methods=["GET"])
 def get_readings():
     return make_response(str(datastore.getreadings(30)), 200)
 
-@app.route("/weather/api/v1.0/readings/<int:reading_id>", methods=["GET"])
+@app.route("/weather/api/readings/<int:reading_id>", methods=["GET"])
 def get_single_reading(reading_id):
     return make_response(str(datastore.getsinglereading(reading_id)), 200)
 
-@app.route("/weather/api/v1.0/readings/", methods=["POST"])
+@app.route("/weather/api/readings/", methods=["POST"])
 def create_reading():
     try:
         print ("POST")
